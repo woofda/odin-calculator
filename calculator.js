@@ -28,7 +28,7 @@ const operate = (a, b, operand) => {
 
 // Display and number variables
 let firstNumber, secondNumber, operator;
-let displayValue = '';
+let displayValue = '0';
 let resetDisplay = false;
 let numberUpdated = true;
 
