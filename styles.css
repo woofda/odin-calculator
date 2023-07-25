@@ -53,7 +53,7 @@ button:hover {
 }
 
 button:active {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .control {
@@ -62,6 +62,11 @@ button:active {
 
 .operator {
     background-color: orange;
+    transition: 200ms ease;
+}
+
+.selected {
+    background-color: coral;
 }
 
 .equals {
