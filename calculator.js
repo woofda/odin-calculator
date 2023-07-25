@@ -36,10 +36,20 @@ const display = document.querySelector('.display');
 
 const updateDisplay = () => {
     if(divByZero) {
+        // Error message after divide by zero, works like clear
         firstNumber = undefined;
         secondNumber = undefined;
         display.innerText = "stop that";
         divByZero = false;
+    } else if(displayValue.length > 11) {
+        if(parseFloat(displayValue) > 99999999999) {
+            // Swap to e notation for display overflow
+            let rounder = 10 ** 6;
+            display.innerText = (Math.round(parseFloat(displayValue) / rounder) * rounder).toExponential();
+        } else {
+            // Chop off right side overflow
+            display.innerText = displayValue.toString().slice(0, 12);
+        }
     } else if(!(displayValue === undefined || displayValue === '')) {
         display.innerText = displayValue;
     }
@@ -56,7 +66,7 @@ const inputNumber = (button) => {
         updateDisplay();
         resetDisplay = false;
         numberUpdated = true;
-    } else {
+    } else if (displayValue.length < 11) {
         displayValue += button.innerText;
         updateDisplay();
         numberUpdated = true;
@@ -118,7 +128,7 @@ const inputDot = () => {
 // Negative button function
 const negate = () => {
     if(displayValue !== 0) {
-        if(!displayValue.includes('-')) {
+        if(!(displayValue.charAt(0) === '-')) {
             displayValue = '-' + displayValue;
         } else {
             displayValue = displayValue.slice(1);
