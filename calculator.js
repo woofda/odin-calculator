@@ -2,8 +2,12 @@
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
+let divByZero = false;
 const divide = (a, b) => {
-    if (b === 0) return NaN;
+    if (b === 0){
+        divByZero = true;
+        return 0;
+    }
     else return a / b;
 }
 
@@ -31,10 +35,9 @@ let numberUpdated = true;
 const display = document.querySelector('.display');
 
 const updateDisplay = () => {
-    if(isNaN(displayValue)) {
+    if(divByZero) {
         firstNumber = undefined;
         secondNumber = undefined;
-        displayValue = '0';
         display.innerText = "Hey, you can't do that!";
     } else if(!(displayValue === undefined || displayValue === '')) {
         display.innerText = displayValue;
@@ -80,7 +83,7 @@ const inputOperator = (button) => {
 const inputEquals = () => {
     if(operator !== undefined) {
         secondNumber = parseFloat(displayValue);
-        displayValue = operate(firstNumber, secondNumber, operator);
+        displayValue = operate(firstNumber, secondNumber, operator).toString();
         updateDisplay();
         firstNumber = undefined;
         secondNumber = undefined;
@@ -111,6 +114,17 @@ const inputDot = () => {
     }
 }
 
+// Negative button function
+const negate = () => {
+    if(displayValue !== 0) {
+        if(!displayValue.includes('-')) {
+            displayValue = '-' + displayValue;
+        } else {
+            displayValue = displayValue.slice(1);
+        }
+        updateDisplay();
+    }
+}
 
 
 /* ******************** BUTTON LISTENERS ********************* */
@@ -144,4 +158,9 @@ document.querySelector('.equals').addEventListener('click', () => {
 // Decimal button listener
 document.querySelector('.decimal').addEventListener('click', () => {
     inputDot();
+})
+
+// Negative button listener
+document.querySelector('.negative').addEventListener('click', () => {
+    negate();
 })
