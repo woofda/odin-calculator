@@ -44,11 +44,11 @@ const updateDisplay = () => {
     } else if(displayValue.length > 11) {
         if(parseFloat(displayValue) > 99999999999) {
             // Swap to e notation for display overflow
-            let rounder = 10 ** 6;
-            display.innerText = (Math.round(parseFloat(displayValue) / rounder) * rounder).toExponential();
+            let stringed = parseFloat(displayValue).toExponential().toString();
+            display.innerText = stringed.slice(0, 6) + stringed.slice(-4);
         } else {
             // Chop off right side overflow
-            display.innerText = displayValue.toString().slice(0, 12);
+            display.innerText = displayValue.toString().slice(0, 11);
         }
     } else if(!(displayValue === undefined || displayValue === '')) {
         display.innerText = displayValue;
@@ -159,17 +159,27 @@ numberButtons.forEach((button) => {
 const operatorButtons = document.querySelectorAll('.operator');
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
+        for(each of operatorButtons) {
+            if(each !== button) each.classList.remove('selected');
+        }
+        button.classList.add('selected');
         inputOperator(button);
     })
 })
 
 // Clear button listener
 document.querySelector('.clear').addEventListener('click', () => {
+    for(each of operatorButtons) {
+        each.classList.remove('selected');
+    }
     clear();
 });
 
 // Equals button listener
 document.querySelector('.equals').addEventListener('click', () => {
+    for(each of operatorButtons) {
+        each.classList.remove('selected');
+    }
     inputEquals();
 })
 
