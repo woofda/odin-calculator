@@ -38,7 +38,8 @@ const updateDisplay = () => {
     if(divByZero) {
         firstNumber = undefined;
         secondNumber = undefined;
-        display.innerText = "Hey, you can't do that!";
+        display.innerText = "stop that";
+        divByZero = false;
     } else if(!(displayValue === undefined || displayValue === '')) {
         display.innerText = displayValue;
     }
