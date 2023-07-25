@@ -126,6 +126,13 @@ const negate = () => {
     }
 }
 
+// Percent button function
+const toPercent = () => {
+    displayValue = (parseFloat(displayValue) / 100).toString();
+    updateDisplay();
+}
+
+
 
 /* ******************** BUTTON LISTENERS ********************* */
 
@@ -163,4 +170,9 @@ document.querySelector('.decimal').addEventListener('click', () => {
 // Negative button listener
 document.querySelector('.negative').addEventListener('click', () => {
     negate();
+})
+
+// Percent button listener
+document.querySelector('.percent').addEventListener('click', () => {
+    toPercent();
 })
