@@ -1,1 +1,3 @@
-A basic calculator to bring together all the elements of HTML, CSS, and Javascript learned so far in the Odin Project.
+# Calculator
+
+A basic calculator made with HTML, CSS, and Javascript.
