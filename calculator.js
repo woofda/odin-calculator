@@ -41,16 +41,11 @@ const updateDisplay = () => {
     }
 }
 
-const clear = () => {
-    displayValue = '0';
-    firstNumber = undefined;
-    secondNumber = undefined;
-    operator = undefined;
-    numberUpdated = true;
-    updateDisplay();
-}
 
-// Event called to add numbers to display
+
+/* ***************** BUTTON EVENT FUNCTIONS ****************** */
+
+// Number button function
 const inputNumber = (button) => {
     if(displayValue === '' || displayValue === '0' || resetDisplay) {
         displayValue = button.innerText;
@@ -64,6 +59,7 @@ const inputNumber = (button) => {
     }
 }
 
+// Operator buttons function
 const inputOperator = (button) => {
     if(firstNumber === undefined) {
         firstNumber = parseFloat(displayValue);
@@ -80,6 +76,7 @@ const inputOperator = (button) => {
     // Add some button effect here
 }
 
+// Equals button function
 const inputEquals = () => {
     if(operator !== undefined) {
         secondNumber = parseFloat(displayValue);
@@ -91,6 +88,32 @@ const inputEquals = () => {
         resetDisplay = true;
     }
 }
+
+// Clear button function
+const clear = () => {
+    displayValue = '0';
+    firstNumber = undefined;
+    secondNumber = undefined;
+    operator = undefined;
+    numberUpdated = true;
+    updateDisplay();
+}
+
+// Decimal button function
+const inputDot = () => {
+    if(resetDisplay) {
+        displayValue = '0';
+        resetDisplay = false;
+    }
+    if(!displayValue.includes('.')) {
+        displayValue += '.';
+        updateDisplay();
+    }
+}
+
+
+
+/* ******************** BUTTON LISTENERS ********************* */
 
 // Number button listeners
 const numberButtons = document.querySelectorAll('.number');
@@ -116,4 +139,9 @@ document.querySelector('.clear').addEventListener('click', () => {
 // Equals button listener
 document.querySelector('.equals').addEventListener('click', () => {
     inputEquals();
+})
+
+// Decimal button listener
+document.querySelector('.decimal').addEventListener('click', () => {
+    inputDot();
 })
