@@ -92,7 +92,7 @@ const inputOperator = (button) => {
 
 // Equals button function
 const inputEquals = () => {
-    if(operator !== undefined) {
+    if(operator !== undefined && numberUpdated) {
         secondNumber = parseFloat(displayValue);
         displayValue = operate(firstNumber, secondNumber, operator).toString();
         updateDisplay();
